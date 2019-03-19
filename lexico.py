@@ -123,7 +123,7 @@ def get_token(state):
 #   a-z, 0-9, . , ' , , , : , ) , = , * , [ , ] , { , } , < , > , ( ,  + , -
 
 states = [
-    [1 , 2  , 4 , 18, 18, 18, 17, 18, 18, 18, 18, 18, 18, 10, 8 , 12 , 21, 19], #Estado 0
+    [1 , 2  , 4 , 18, 18, 6, 17, 18, 18, 18, 18, 18, 18, 10, 8 , 12 , 21, 19], #Estado 0
     [1 , 1  , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], #Estado 1
     [-1, 2  , 3 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], #Estado 2
     [-1, 3  , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], #Estado 3
@@ -147,9 +147,11 @@ states = [
     [-1, 21 , 22, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], #Estado 21
     [-1, 22 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], #Estado 22
 ]
-
-line = input()
-while(line != ''):
+print("Analisador Lexico\nPara sair, digite \'exit()\'\n\n\n")
+line = input("Digite sua entrada de dados: ")
+while line != '' :
+    if line == "exit()":
+        break
     next = 0
     current = 0
     last_final = 0
@@ -170,11 +172,11 @@ while(line != ''):
                     curent = i
                     #Se chegou no final da linha
                     if j == len(line) - 1:
-                        """@@@@@@@@@@@@@@@@@@@@ Tratar quando termina em
-                            um estado nao final @@@@@@@@@@@@@@@@
-                        """
-                        print("Token lido: " + get_token(current))
-
+                        print("Token lido: " + get_token(last_final))
+                        i = cm
+                        current = 0
+                        last_final = 0
+                        next = 0
             #Se o caractere lido nao leva a um proximo estado
             else:
                 #Se o caractere lido nao leva a um proximo estado e o automato esta no estado inicial
@@ -189,11 +191,22 @@ while(line != ''):
                 #inicial, ainda pode ser aceito pela linguagem
                 else:
                     i = cm
-                    print("Token lido: " + get_token(current))
+                    print("Token lido: " + get_token(last_final))
                     current = 0
                     next = 0
                     last_final = 0
+        #Se o simbolo lido nao pertence ao alfabeto
+        else:
+            #Se o simbolo lido for espaco, nao ha erro lexico, apenas imprimimos o token lido
+            #ate aqui, e resetamos o automato
+            if c == ' ':
+                print("Token lido: " + get_token(last_final))
+                i = cm
+                current = 0
+                last_final = 0
+                next = 0
+            else:
+                print("Erro lexico")
 
 
-
-    line = input()
+    line = input("Digite sua entrada de dados: ")
