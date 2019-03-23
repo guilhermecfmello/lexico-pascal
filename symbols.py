@@ -1,6 +1,6 @@
 class SymbolsTab:
     def __init__(self):
-        self.dic = {"and":25,"array":26,"asm":27,"begin":28,
+        self.dic = {"array":26,"asm":27,"begin":28,
         "case":29, "const":30, "constructor": 31, "destructor":32,
         "div":33, "do":34, "downto": 35, "else": 36, "End": 37,
         "File": 38, "For": 39, "Foward": 40, "Function": 41, "Goto": 42,
@@ -10,7 +10,7 @@ class SymbolsTab:
         "program": 57, "record": 58, "repeat": 59, "set": 60, "shl": 61,
         "shr": 62, "string": 63, "then": 64, "to": 65, "type": 66,
         "unit": 67, "until": 68, "uses": 69, "var": 70, "while": 71,
-        "with": 72, "xor": 73}
+        "with": 72, "xor": 73, "and": 74}
 
 
     #Acessa a tabela de simbolos, se a string existir na mesma e
