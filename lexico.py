@@ -180,7 +180,6 @@ def identifiers(dic, string, str_final):
     str_final = str_final + "\n"
     return str_final
 #   a-z, 0-9, . , ' , , , : , ) , = , * , [ , ] , { , } , < , > , ( ,  + , - , ; , /
-
 states = [
     [1 , 2  , 4 , 18, 18, 6, 17, 18, 18, 18, 18, 18, 18, 10, 8 , 12 , 23, 24 , 18,18], #Estado 0
     [1 , 1  , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 1
@@ -236,7 +235,8 @@ while line != '' :
 
         j = j + 1
         column = get_column(c)
-        #Se o simbolo lido pertencer ao alfabeto
+        #Se o simbolo lido pertencer ao alfabetos
+        # column = get_column(c)
         if column > -1:
             next = states[current][column]
             #Se o caractere lido leva a um proximo estado
