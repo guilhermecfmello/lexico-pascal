@@ -180,7 +180,25 @@ def identifiers(dic, string, str_final):
     str_final = str_final + "\n"
     return str_final
 
-
+#Caso especial 1: Quando lido um numero e em seguida uma letra, ex: 2a
+#Deve gerar erro lexico
+def is_number(c):
+    if c in ['0','1','2','3','4','5','6','7','8','9']:
+        return 1
+    else:
+        return 0
+        
+# Verifica se o estado "state" corresponde a um estado final de token numerico
+# Caso seja numero, retorna 1. Retorna 0 caso contrario
+def state_is_numeric(state):
+    if state in [2,3,19,20,21,22]:
+        return 1
+    else:
+        return 0
+# def specialCaseNumberIdError(state, read):
+#     if read >= 'a' and read <= 'z':
+#         if state in [2,3,19,20,21,22]
+#             return 1
 
 
 
@@ -237,18 +255,23 @@ while line != '' :
     j = 0
     start_char = 0
     end_char = 0
+
+
+    excep1 = False
     while(j < len(line)):
-    #for j in range(len(line)):
         c = line[j]
+        if not is_char(c):
+            excep1 = False
+        
         #Verifica se comecou a reconhecer uma palavra-chave/identificador
         if is_char(c) and current == 0:
             start_char = j
 
         j = j + 1
         column = get_column(c)
-        #Se o simbolo lido pertencer ao alfabetos
-        # column = get_column(c)
-        if column > -1:
+        #Se o simbolo lido pertencer ao alfabeto
+        if column > -1 and not excep1:
+            
             next = states[current][column]
             #Se o caractere lido leva a um proximo estado
             if next > -1:
@@ -276,15 +299,12 @@ while line != '' :
                             cm = j
                         else:
                             if last_final != 18:
-                                # print("1:Token lido: " + get_token(last_final))
                                 str_final = str_final + get_token(last_final) + "\n"
-                                # print(str_final)
                                 j = cm
                                 current = 0
                                 last_final = 0
                                 next = 0
                             else:
-                                # print("4:Token lido: " + get_special_token(c))
                                 str_final = str_final + get_special_token(c) + "\n"
 
             #Se o caractere lido nao leva a um proximo estado
@@ -292,7 +312,6 @@ while line != '' :
                 #Se o caractere lido nao leva a um proximo estado e o automato esta no estado inicial
                 #entao o char nao existe no alfabeto da linguagem, ou seja, erro lexico
                 if current == 0:
-                    # print("ERRO")
                     cm = j
                     current = 0
                     last_final = 0
@@ -303,11 +322,13 @@ while line != '' :
                 #Se o caractere nao leva a um proximo estado, mas tb o automato nao esta no estado
                 #inicial, ainda pode ser aceito pela linguagem
                 else:
-                    # j = cm
+                    # Caso excessao 1 , exemplo 2a
+                    if state_is_numeric(last_final):
+                        if is_char(c):
+                            excep1 = True
                     #Se nao for um dos caracteres especiais, podera imprimir o token
                     #do ultimo estado final, caso contrario, deve-se verificar qual
                     #eh o token lido
-
                     if last_final == 1:
                         j = j - 1
                         id = line[start_char:j]
@@ -317,16 +338,17 @@ while line != '' :
                         next = 0
                         cm = j
                     else:
-                        if last_final != 18:
-                            # print("2:Token lido: " + get_token(last_final))
+                        if excep1:
+                            if not cond_error:
+                                cond_error = 1
+                                indexError = j
+                        elif last_final != 18:
                             str_final = str_final + get_token(last_final) + "\n"
                             j = cm
                             current = 0
                             next = 0
                             last_final = 0
                         else:
-                            # print("C: " + c + "line[j]: " + line[j])
-                            # print("5:Token lido: " + get_special_token(line[j-2]) + " | J: " + str(j))
                             str_final = str_final + get_special_token(line[j-2]) + "\n"
                             j = cm
                             current = 0
@@ -389,7 +411,10 @@ while line != '' :
         finalPrint = finalPrint + str_final
 # /        str_final = str_final 
         # print(str_final, end="")
-    line = input().lower()
+    try:
+        line = input().lower()
+    except EOFError:
+        break
     lineError = lineError + 1
     # line = line.lower()
 
