@@ -2,7 +2,5 @@ int a =
 2
 ab 1231
 12:=1
-var x := 22  a
-
-
-
+var x := 22  a_
+aosdkaos kdoaskd 

@@ -75,6 +75,8 @@ def get_column(c):
         return 18
     elif c == '/':
         return 19
+    elif c == '_':
+        return 20
     else:
         return -1
 
@@ -195,46 +197,43 @@ def state_is_numeric(state):
         return 1
     else:
         return 0
-# def specialCaseNumberIdError(state, read):
-#     if read >= 'a' and read <= 'z':
-#         if state in [2,3,19,20,21,22]
-#             return 1
 
 
 
 # CONSTANTES PARA CORES NO TERMINAL
 VERMELHO = '\033[01;31m'
 VERDE = '\033[32m'
-BRANCO = '\n\033[00;37m'
-#   a-z, 0-9, . , ' , , , : , ) , = , * , [ , ] , { , } , < , > , ( ,  + , - , ; , /
+BRANCO = '\033[00;37m'
+
+#   a-z, 0-9, . , ' , , , : , ) , = , * , [ , ] , { , } , < , > , ( ,  + , - , ; , / , _
 states = [
-    [1 , 2  , 4 , 18, 18, 6, 17, 18, 18, 18, 18, 18, 18, 10, 8 , 12 , 23, 24 , 18,18], #Estado 0
-    [1 , 1  , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 1
-    [-1, 2  , 3 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 2
-    [-1, 3  , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 3
-    [-1, -1 , 5 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 4
-    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 5
-    [-1, -1 , -1 , -1, -1, -1, -1, 7, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 6
-    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 7
-    [-1, -1 , -1, -1, -1, -1, -1, 9 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 8
-    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 9
-    [-1, -1 , -1, -1, -1, -1, -1, 11, -1, -1, -1, -1, -1, -1, 25, -1, -1, -1 ,-1 ,-1], #Estado 10
-    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 11
-    [-1, -1 , -1, -1, -1, -1, -1, -1, 26, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 12
-    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 13
-    [-1, -1 , -1, -1, -1, -1, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 14
-    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 15
-    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 16
-    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 17
-    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 18
-    [-1, 19 , 20, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 19
-    [-1, 20 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 20
-    [-1, 21 , 22, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 21
-    [-1, 22 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 22
-    [-1, 21 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 23
-    [-1, 19 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 24
-    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1], #Estado 25
-    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1]  #Estado 26
+    [1 , 2  , 4 , 18, 18, 6, 17, 18, 18, 18, 18, 18, 18, 10, 8 , 12 , 23, 24 , 18,18, -1], #Estado 0
+    [1 , 1  , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1,  1], #Estado 1
+    [-1, 2  , 3 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 2
+    [-1, 3  , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 3
+    [-1, -1 , 5 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 4
+    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 5
+    [-1, -1 , -1 , -1, -1, -1, -1, 7, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 6
+    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 7
+    [-1, -1 , -1, -1, -1, -1, -1, 9 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 8
+    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 9
+    [-1, -1 , -1, -1, -1, -1, -1, 11, -1, -1, -1, -1, -1, -1, 25, -1, -1, -1 ,-1 ,-1, -1], #Estado 10
+    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 11
+    [-1, -1 , -1, -1, -1, -1, -1, -1, 26, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 12
+    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 13
+    [-1, -1 , -1, -1, -1, -1, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 14
+    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 15
+    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 16
+    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 17
+    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 18
+    [-1, 19 , 20, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 19
+    [-1, 20 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 20
+    [-1, 21 , 22, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 21
+    [-1, 22 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 22
+    [-1, 21 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 23
+    [-1, 19 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 24
+    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1], #Estado 25
+    [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1, -1]  #Estado 26
 ]
 print("Analisador Lexico\nPara sair, digite \'exit()\'\n\n\n")
 line = input().lower()
@@ -263,6 +262,12 @@ while line != '' :
         if not is_char(c):
             excep1 = False
         
+        # Excecao do underline
+        if c == '_' and current != 1:
+            if not cond_error:
+                indexError = j
+            cond_error = 1
+
         #Verifica se comecou a reconhecer uma palavra-chave/identificador
         if is_char(c) and current == 0:
             start_char = j
@@ -279,11 +284,9 @@ while line != '' :
                 #Se o proximo estado eh um estado final, confirmamos a leitura lida ate aqui
                 if is_final(next):
                     last_final = current
-                    # print("Last_final: " + str(last_final))
                     cm = j
                     #Se chegou no final da linha
                     if j == len(line):
-                        # print("TESTE STR_FINAL: " + str_final)
 
                         #Se nao for um dos caracteres especiais, podera imprimir o token
                         #do ultimo estado final, caso contrario, deve-se verificar qual
@@ -293,20 +296,18 @@ while line != '' :
                             #na tabela de simbolos
                             id = line[start_char:j]
                             str_final = identifiers(dic, id, str_final)
-                            current = 0
-                            last_final = 0
-                            next = 0
+                            
                             cm = j
                         else:
                             if last_final != 18:
                                 str_final = str_final + get_token(last_final) + "\n"
                                 j = cm
-                                current = 0
-                                last_final = 0
-                                next = 0
                             else:
                                 str_final = str_final + get_special_token(c) + "\n"
-
+                                    
+                        current = 0
+                        last_final = 0
+                        next = 0
             #Se o caractere lido nao leva a um proximo estado
             else:
                 #Se o caractere lido nao leva a um proximo estado e o automato esta no estado inicial
@@ -323,9 +324,8 @@ while line != '' :
                 #inicial, ainda pode ser aceito pela linguagem
                 else:
                     # Caso excessao 1 , exemplo 2a
-                    if state_is_numeric(last_final):
-                        if is_char(c):
-                            excep1 = True
+                    if state_is_numeric(last_final) and is_char(c):
+                        excep1 = True
                     #Se nao for um dos caracteres especiais, podera imprimir o token
                     #do ultimo estado final, caso contrario, deve-se verificar qual
                     #eh o token lido
@@ -342,14 +342,12 @@ while line != '' :
                             if not cond_error:
                                 cond_error = 1
                                 indexError = j
-                        elif last_final != 18:
-                            str_final = str_final + get_token(last_final) + "\n"
-                            j = cm
-                            current = 0
-                            next = 0
-                            last_final = 0
                         else:
-                            str_final = str_final + get_special_token(line[j-2]) + "\n"
+                            if last_final != 18:
+                                str_final = str_final + get_token(last_final) + "\n"
+                            else:
+                                str_final = str_final + get_special_token(line[j-2]) + "\n"
+                            
                             j = cm
                             current = 0
                             next = 0
@@ -367,25 +365,18 @@ while line != '' :
                 if last_final == 1:
                     id = line[start_char:j - 1]
                     str_final = identifiers(dic, id, str_final)
-                    current = 0
-                    last_final = 0
-                    next = 0
                     cm = j
                 else:
                     if last_final != 18:
-                        # print("3:Token lido: " + get_token(last_final))
                         str_final = str_final + get_token(last_final) + "\n"
                         j = cm
-                        current = 0
-                        last_final = 0
-                        next = 0
                     else:
-                        # print("6:Token lido: " + get_special_token(line[j-2]))
                         str_final = str_final + get_special_token(line[j-2]) + "\n"
-                        current = 0
-                        last_final = 0
-                        next = 0
                         cm = j
+
+                current = 0
+                last_final = 0
+                next = 0
             #Se o simbolo lido eh um espaco, mas esta no estado inicial, devemos desconsidera-lo
             elif c == ' ' and current == 0:
                 current = 0
