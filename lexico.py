@@ -179,6 +179,15 @@ def identifiers(dic, string, str_final):
 
     str_final = str_final + "\n"
     return str_final
+
+
+
+
+
+# CONSTANTES PARA CORES NO TERMINAL
+VERMELHO = '\033[01;31m'
+VERDE = '\033[32m'
+BRANCO = '\n\033[00;37m'
 #   a-z, 0-9, . , ' , , , : , ) , = , * , [ , ] , { , } , < , > , ( ,  + , - , ; , /
 states = [
     [1 , 2  , 4 , 18, 18, 6, 17, 18, 18, 18, 18, 18, 18, 10, 8 , 12 , 23, 24 , 18,18], #Estado 0
@@ -210,10 +219,12 @@ states = [
     [-1, -1 , -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ,-1 ,-1]  #Estado 26
 ]
 print("Analisador Lexico\nPara sair, digite \'exit()\'\n\n\n")
-line = input("Digite sua entrada de dados: ").lower()
+line = input().lower()
 
 #Inicializando tabela de palavras-chave/identificadores
 dic = SymbolsTab()
+lineError = 1
+finalPrint = ''
 while line != '' :
     if line == "exit()":
         break
@@ -367,12 +378,21 @@ while line != '' :
 
 
     if cond_error:
-        print("\033[01;31m")
-        print("\nErro lexico em:\n\033[00;37m" + line)
+        print(VERMELHO)
+        print("\nErro lexico na linha " + VERDE + str(lineError) + VERMELHO +" coluna "+ VERDE + str(indexError) + BRANCO)
+        print(line)
         for k in range(1, indexError):
             print(" ", end = "")
-        print("\033[01;32m^\033[00;37m\n\n\n")
+        print(VERDE + "^" + BRANCO + "\n\n\n")
+        break
     else:
-        print(str_final)
-    line = input("Digite sua entrada de dados: ").lower()
+        finalPrint = finalPrint + str_final
+# /        str_final = str_final 
+        # print(str_final, end="")
+    line = input().lower()
+    lineError = lineError + 1
     # line = line.lower()
+
+if not cond_error:
+    print(VERDE + "COMPILADO SEM ERROS LEXICOS:" + BRANCO)
+    print(finalPrint)
