@@ -30,6 +30,7 @@ __     ___       _      _              ____           _       _
 
 from hash_symbol import HashTable
 
+
 # Dado um caractere pertencente ao alfabeto, retorna a coluna
 # correspondente na matriz de adjacencia
 def get_column(c):
@@ -262,7 +263,7 @@ while line != '':
     end_char = 0
 
     excep1 = False
-    while (j < len(line)):
+    while j < len(line):
         c = line[j]
         if not is_char(c):
             excep1 = False
@@ -414,7 +415,7 @@ while line != '':
     lineError = lineError + 1
     # line = line.lower()
 
-#dic.hash_info()
+# dic.hash_info()
 
 if not cond_error:
     print(VERDE + "COMPILADO SEM ERROS LEXICOS:" + BRANCO)
