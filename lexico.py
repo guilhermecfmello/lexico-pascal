@@ -140,24 +140,26 @@ def get_token(state):
 # Quando o automato termina no estado 18, deve-se saber qual eh o simbolo
 # lido e entao imprimir seu Token
 def get_special_token(c):
+    base = "Símbolo Especial Simples "
+
     if c == ';':
-        return "Ponto e virgula"
+        return base + c
     elif c == ',':
-        return "Virgula"
+        return base + c
     elif c == '=':
-        return "Igual"
+        return base + c
     elif c == '*':
-        return "Asterisco"
+        return base + c
     elif c == '[':
-        return "Colchete_esq"
+        return base + c
     elif c == ']':
-        return "Colchete_dir"
+        return base + c
     elif c == '{':
-        return "Chave_esq"
+        return base + c
     elif c == '}':
-        return "Chave_dir"
+        return base + c
     elif c == '/':
-        return "Divisao"
+        return base + c
 
 
 # Se o caractere passado estiver em [a,b], retorna 1
@@ -173,19 +175,19 @@ def is_char(c):
 def identifiers(dic, string, str_final):
     cond_dic = dic.instalar_id(string)
     # Se for uma palavra-chave
-    if cond_dic > 1:
-        str_final = str_final + string.upper()
-        # print("7:Token lido: " + id.upper())
-    elif cond_dic == 1:
-        # print("8:Token lido: Identificador("+ id.upper() + ") encontrado")
-        str_final = str_final + "Identificador(" + string.upper() + ") encontrado"
-    elif cond_dic == 0:
+    # if cond_dic > 1:
+    #     str_final = str_final + string.upper()
+    # print("7:Token lido: " + id.upper())
+    # elif cond_dic == 1:
+    # print("8:Token lido: Identificador("+ id.upper() + ") encontrado")
+    # str_final = str_final + "Identificador(" + string.upper() + ") encontrado"
+    if cond_dic == 0:
         # print("9:Token lido: Identificador("+ id.upper() + ") armazenado")
-        str_final = str_final + "Identificador(" + string.upper() + ") armazenado"
+        str_final = str_final + "Identificador " + string.upper() + "\n"
     elif cond_dic == -1:
-        str_final = str_final + "Palavra reservada : (" + string.upper() + ")"
+        str_final = str_final + "Palavra Reservada " + string.upper() + "\n"
 
-    str_final = str_final + "\n"
+    # str_final = str_final + "\n"
     return str_final
 
 

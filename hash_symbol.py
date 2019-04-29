@@ -1,7 +1,7 @@
 class HashTable:
     tbSize = 256
     keywords = ["array", "asm", "begin", "case", "const", "constructor", "destructor", "div", "do", "downto", "else",
-                "end", "file", "for", "forward", "function", "goto", "if", "implementation", "In", "inline", "interface",
+                "end", "file", "for", "forward", "function", "goto", "if", "implementation", "in", "inline", "interface",
                 "label", "mod", "nil", "not", "object", "of", "or", "packed", "procedure", "program", "record",
                 "repeat", "set", "shl", "shr", "string", "then", "to", "type", "unit", "until", "uses", "var", "while",
                 "with", "xor", "and"]
