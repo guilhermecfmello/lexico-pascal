@@ -100,42 +100,39 @@ def get_token(state):
     if state == 2 or state == 3:
         return "Numeral positivo"
     elif state == 4:
-        return "Ponto simples"
+        return "Simbolo especial simples ."
     elif state == 5:
-        return "Ponto duplo"
+        return "Simbolo especial composto .."
     elif state == 6:
-        return "Dois pontos"
+        return "Simbolo especial simples :"
     elif state == 7:
-        return "Atribuicao"
+        return "Simbolo especial composto :="
     elif state == 8:
-        return "Maior que"
+        return "Simbolo especial simples >"
     elif state == 9:
-        return "Maior ou igual que"
+        return "Simbolo especial composto >="
     elif state == 10:
-        return "Menor que"
+        return "Simbolo especial simples <"
     elif state == 11:
-        return "Menor ou igual que"
+        return "Simbolo especial composto <="
     elif state == 12:
-        return "Parenteses_esq"
+        return "Simbolo especial simples ("
     elif state == 15:
         return "Comentario_fecho"
     elif state == 17:
-        return "Parenteses_dir"
-    elif state == 18:
-        return "Varios (Tratar aqui)"
+        return "Simbolo especial composto )"
     elif state == 19 or state == 20:
         return "Numeral negativo"
     elif state == 21 or state == 22:
         return "Numeral positivo"
     elif state == 23:
-        return "Mais"
+        return "Simbolo especial simples +"
     elif state == 24:
-        return "Menos"
+        return "Simbolo especial simples -"
     elif state == 25:
-        return "Diferente"
+        return "Simbolo especial composto <>"
     else:
         return ""
-
 
 # Quando o automato termina no estado 18, deve-se saber qual eh o simbolo
 # lido e entao imprimir seu Token
@@ -174,20 +171,10 @@ def is_char(c):
 # Trata identificadores
 def identifiers(dic, string, str_final):
     cond_dic = dic.instalar_id(string)
-    # Se for uma palavra-chave
-    # if cond_dic > 1:
-    #     str_final = str_final + string.upper()
-    # print("7:Token lido: " + id.upper())
-    # elif cond_dic == 1:
-    # print("8:Token lido: Identificador("+ id.upper() + ") encontrado")
-    # str_final = str_final + "Identificador(" + string.upper() + ") encontrado"
     if cond_dic == 0:
-        # print("9:Token lido: Identificador("+ id.upper() + ") armazenado")
         str_final = str_final + "Identificador " + string.upper() + "\n"
     elif cond_dic == -1:
         str_final = str_final + "Palavra Reservada " + string.upper() + "\n"
-
-    # str_final = str_final + "\n"
     return str_final
 
 
@@ -216,15 +203,15 @@ BRANCO = '\033[00;37m'
 
 #   a-z, 0-9, . , ' , , , : , ) , = , * , [ , ] , { , } , < , > , ( ,  + , - , ; , / , _
 states = [
-    [1, 2, 4, 18, 18, 6, 17, 18, 18, 18, 18, 18, 18, 10, 8, 12, 23, 24, 18, 18, -1],  # Estado 0
-    [1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1],  # Estado 1
-    [-1, 2, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 2
-    [-1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 3
-    [-1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 4
+    [ 1,  2,  4, 18, 18,  6, 17, 18, 18, 18, 18, 18, 18, 10,  8, 12, 23, 24, 18, 18, -1],  # Estado 0
+    [ 1,  1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  1],  # Estado 1
+    [-1,  2,  3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 2
+    [-1,  3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 3
+    [-1, -1,  5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 4
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 5
-    [-1, -1, -1, -1, -1, -1, -1, 7, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 6
+    [-1, -1, -1, -1, -1, -1, -1,  7, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 6
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 7
-    [-1, -1, -1, -1, -1, -1, -1, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 8
+    [-1, -1, -1, -1, -1, -1, -1,  9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 8
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 9
     [-1, -1, -1, -1, -1, -1, -1, 11, -1, -1, -1, -1, -1, -1, 25, -1, -1, -1, -1, -1, -1],  # Estado 10
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 11
@@ -422,3 +409,45 @@ while line != '':
 if not cond_error:
     print(VERDE + "COMPILADO SEM ERROS LEXICOS:" + BRANCO)
     print(finalPrint)
+
+
+
+
+# Antigo get_token() aqui:
+
+
+
+# elif state == 4:
+#     return "Ponto simples"
+# elif state == 5:
+#     return "Ponto duplo"
+# elif state == 6:
+#     return "Dois pontos"
+# elif state == 7:
+#     return "Atribuicao"
+# elif state == 8:
+#     return "Maior que"
+# elif state == 9:
+#     return "Maior ou igual que"
+# elif state == 10:
+#     return "Menor que"
+# elif state == 11:
+#     return "Menor ou igual que"
+# elif state == 12:
+#     return "Parenteses_esq"
+# elif state == 15:
+#     return "Comentario_fecho"
+# elif state == 17:
+#     return "Parenteses_dir"
+# elif state == 18:
+#     return "Varios (Tratar aqui)"
+# elif state == 19 or state == 20:
+#     return "Numeral negativo"
+# elif state == 21 or state == 22:
+#     return "Numeral positivo"
+# elif state == 23:
+#     return "Mais"
+# elif state == 24:
+#     return "Menos"
+# elif state == 25:
+#     return "Diferente"
