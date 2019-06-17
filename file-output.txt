@@ -1,0 +1,41 @@
+Analisador Lexico
+Para sair, digite 'exit()'
+
+
+
+[32mCOMPILADO SEM ERROS LEXICOS:[00;37m
+Identificador INT
+Identificador A
+Símbolo Especial Simples =
+Numeral positivo
+Símbolo Especial Simples =
+Numeral positivo
+Identificador AB
+Numeral positivo
+Numeral positivo
+Simbolo especial composto :=
+Numeral positivo
+Palavra Reservada VAR
+Identificador X
+Simbolo especial composto :=
+Numeral positivo
+Identificador A_
+Simbolo especial simples (
+Simbolo especial composto )
+Simbolo especial simples <
+Simbolo especial simples .
+Palavra Reservada IN
+Identificador NOVO
+Palavra Reservada INLINE
+Simbolo especial composto :=
+Identificador LOREM
+Identificador IPSUM
+Palavra Reservada DOWNTO
+Identificador COISA
+Identificador NVA
+Identificador MAIS
+Identificador AI
+Identificador ORA
+Identificador ENCHER
+Identificador MSM
+
