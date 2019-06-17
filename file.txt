@@ -2,11 +2,14 @@ int a =
 2
 ab 1231
 12:=1
+ab
 var x := 22  a_ ( ) < .
 x
 in
+ab
 novo
 ab
+var x = 43 j_ (
 inline
 :=
 lorem

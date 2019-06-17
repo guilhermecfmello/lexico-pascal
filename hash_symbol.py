@@ -1,15 +1,26 @@
 class HashTable:
+    """
+    Tabela hash contendo os identificadores lidos
+    """
     tbSize = 256
-    keywords = ["array", "asm", "begin", "case", "const", "constructor", "destructor", "div", "do", "downto", "else",
-                "end", "file", "for", "forward", "function", "goto", "if", "implementation", "in", "inline", "interface",
+    keywords = ("array", "asm", "begin", "case", "const", "constructor", "destructor", "div", "do", "downto", "else",
+                "end", "file", "for", "forward", "function", "goto", "if", "implementation", "in", "inline",
+                "interface",
                 "label", "mod", "nil", "not", "object", "of", "or", "packed", "procedure", "program", "record",
                 "repeat", "set", "shl", "shr", "string", "then", "to", "type", "unit", "until", "uses", "var", "while",
-                "with", "xor", "and"]
+                "with", "xor", "and")
 
     def __init__(self):
+        """
+        Inicializa a hash table
+        """
         self.table = [[] for _ in range(self.tbSize)]
 
-    def hash_func(self, key):  # HASH DO SLIDE DA PROFESSORA
+    def hash_func(self, key):
+        """
+        Função de hash apresentada pela professora
+
+        """
         hash_value = 0
         alfa = 10
         for i in range(len(key)):
@@ -23,7 +34,7 @@ class HashTable:
 
         result = self.search(data)
         if result:
-            return 1
+            return 0
         else:
             self.table[self.hash_func(data)].append(data)
             return 0
