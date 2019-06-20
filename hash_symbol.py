@@ -3,12 +3,16 @@ class HashTable:
     Tabela hash contendo os identificadores lidos
     """
     tbSize = 256
-    keywords = ("array", "asm", "begin", "case", "const", "constructor", "destructor", "div", "do", "downto", "else",
-                "end", "file", "for", "forward", "function", "goto", "if", "implementation", "in", "inline",
-                "interface",
-                "label", "mod", "nil", "not", "object", "of", "or", "packed", "procedure", "program", "record",
-                "repeat", "set", "shl", "shr", "string", "then", "to", "type", "unit", "until", "uses", "var", "while",
-                "with", "xor", "and")
+    # keywords = ("array", "asm", "begin", "case", "const", "constructor", "destructor", "div", "do", "downto", "else",
+    #             "end", "file", "for", "forward", "function", "goto", "if", "implementation", "in", "inline",
+    #             "interface", "label", "mod", "nil", "not", "object", "of", "or", "packed", "procedure", "program", "record",
+    #             "repeat", "set", "shl", "shr", "string", "then", "to", "type", "unit", "until", "uses", "var", "while",
+    #             "with", "xor", "and")
+    keywords = (
+    "and", "array", "begin", "case", "const", "constructor", "destructor", "div", "do", "downto", "else", "end", "file",
+    "for", "function", "goto", "if", "inherited", "implementation", "in", "inline", "interface", "label", "mod", "nil",
+    "not", "object", "of", "or", "packed", "procedure", "program", "record", "repeat", "set", "shl", "shr", "string",
+    "then", "to", "type", "unit", "until", "uses", "var", "while", "with")
 
     def __init__(self):
         """
@@ -30,14 +34,14 @@ class HashTable:
 
     def instalar_id(self, data):
         if data.lower() in self.keywords:
-            return -1
+            return 0
 
         result = self.search(data)
         if result:
-            return 0
+            return 1
         else:
             self.table[self.hash_func(data)].append(data)
-            return 0
+            return 1
 
     def search(self, key):
         bucket = self.table[self.hash_func(key)]

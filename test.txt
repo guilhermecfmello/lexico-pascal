@@ -17,7 +17,7 @@ const
   translationArray: array [0..25] of string = ('.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..', '.---', '-.-', '.-..', '--', '-.', '---', '.--.', '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-', '-.--', '--..');
 begin
   if character = ' ' then
-    getCharacterCode := '| '
+    getCharacterCode := ' '
   else
     begin
       getCharacterCode := translationArray[ord(character) - 65] + ' ';
@@ -40,7 +40,7 @@ begin
       writeln(codedString);
     end
   else
-    writeln('Invalid input!');
+    writeln('Invalid input');
 end;
 
 begin

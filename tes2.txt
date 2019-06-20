@@ -1,6 +1,6 @@
-program MorseCoding;
+program MorseCoding; (*la*)
 
-function checkUserInput(userString: string): boolean; <= @
-var := 12 14.7 >=  =
+funct_ion checkUserInput(user,String: string): boolean; <=
+var := 12 14.7 >=  = < <>
   valid: boolean; -15   ..
-  count: integer; -15.89 .
+  count: integer; -15.89 . '',

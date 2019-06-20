@@ -5,7 +5,7 @@ Vinicius Carloto Carnelocce
 
 """
 import sys
-
+from hash_symbol import HashTable
 from scanner import AFD
 
 if __name__ == '__main__':
@@ -21,6 +21,9 @@ if __name__ == '__main__':
         sys.exit(1)
 
     scanner = AFD()
+    id_table = HashTable()
 
     with file:
-        scanner.scan(file)
+        scanner.scan(file, id_table)
+        scanner.scanner_print()
+        id_table.hash_info()

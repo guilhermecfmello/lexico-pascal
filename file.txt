@@ -2,7 +2,7 @@ int a =
 2
 ab 1231
 12:=1
-ab
+ab a32_ 2a
 var x := 22  a_ ( ) < .
 x
 in
