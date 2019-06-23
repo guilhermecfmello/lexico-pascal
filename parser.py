@@ -214,6 +214,169 @@ class Parser:
                 self.number()
             self.command_without_label()
 
+
+    def commandWithoutLabel(self):
+        if 'identificador' in self.current:
+            self.identifier()
+            if '[' in self.current:
+                self.eat('[')
+                self.expression()
+                while ',' in self.current:
+                    self.eat(',')
+                    self.expression()
+                self.eat(']')
+                self.eat(':=')
+                self.expression()
+            elif '(' in self.current:
+                self.eat('(')
+                self.expression()
+                while ',' in self.current:
+                    self.eat(',')
+                    self.expression()
+                self.eat(')')
+            else:
+                pass
+        elif 'goto' in self.current:
+            self.eat('goto')
+            self.number()
+        elif 'begin' in self.current:
+            self.eat('begin')
+            self.command()
+            while ';' in self.current:
+                self.eat(';')
+                self.command()
+            self.eat('end')
+        elif 'if' in self.current:
+            self.eat('if')
+            self.expression()
+            self.eat('then')
+            self.commandWithoutLabel()
+            if 'else' in current:
+                self.eat('else')
+                self.commandWithoutLabel()
+
+    def expression(self):
+        self.simpleExpression():
+        tempList = ['=','<>','<', '<=', '>=', '>']
+
+        if any(item in self.current for item in tempList):
+            self.eat()
+            self.simpleExpression()
+
+    def simpleExpression():
+        if '+' in self.current:
+            self.eat('+')
+        elif '-' in self.current:
+            self.eat('-')
+
+        self.term()
+
+        while '+' in self.current or '-' in self.current or 'or' in self.current:
+            if '+' in self.current:
+                self.eat('+')
+            elif '-' in self.current:
+                self.eat('-')
+            elif 'or' in self.current:
+                self.eat('or')
+            self.term()
+
+    def term(self):
+        self.factor()
+        while '*' in self.current or 'div' in self.current or 'and' in self.current:
+            if '*' in self.current:
+                self.eat('*')
+            elif 'div' in self.current:
+                self.eat('div')
+            elif 'and' in self.current:
+                self.eat('and')
+            self.factor()
+
+    def factor(self):
+        if 'identificador' in self.current:
+            self.identifier()
+            if '[' in self.current:
+                self.eat('[')
+                self.expression()
+                while ',' in self.current:
+                    self.eat(',')
+                    self.expression()
+                self.eat(']')
+            elif '(' in self.current:
+                if '(' in self.current:
+                    self.eat('(')
+                    self.expression()
+                    while ',' in self.current:
+                        self.eat(',')
+                        self.expression()
+                    self.eat(')')
+            else:
+                pass
+        elif 'numero inteiro' in self.current or 'numero real' in self.current:
+            self.number()
+        elif '(' in self.current:
+            self.eat('(')
+            self.expression()
+            self.eat(')')
+        elif 'not' in self.current:
+            self.eat('not')
+            self.factor()
+
+
+
+
+
+
+    # def block(self):
+    #     if self.eat('label'):
+    #         self.digest(self.number())
+    #         while self.eat(','):
+    #             self.digest(self.number())
+    #         self.digest(self.eat(';'))
+    #         return self.digest(self.block())
+    #     if self.eat('type'):
+    #         self.digest(self.identifier())
+    #         self.digest(self.eat('='))
+    #         self.digest(self.type())  # TODO type
+    #         self.digest(self.eat(';'))
+    #         while self.identifier():
+    #             self.digest(self.eat(';'))
+    #         return self.digest(self.block())
+    #     if self.digest(self.eat('var')):
+    #         self.digest(self.identifier())
+    #         while self.eat(','):
+    #             self.digest(self.identifier())
+    #         self.digest(self.eat(':'))
+    #         self.digest(self.type())
+    #         self.digest(self.eat(';'))
+    #         while self.identifier():
+    #             while self.eat(','):
+    #                 self.digest(self.identifier())
+    #             self.digest(self.eat(':'))
+    #             self.digest(self.type())
+    #             self.digest(self.eat(';'))
+    #         return self.digest(self.block())
+    #     if self.eat('procedure'):
+    #         self.digest(self.identifier())
+    #         self.formal_param()  # TODO formal_param
+    #         self.digest(self.eat(';'))
+    #         self.digest(self.block())
+    #         self.digest(self.eat(';'))
+    #         return self.digest(self.block())
+    #     if self.eat('procedure'):
+    #         self.digest(self.identifier())
+    #         self.formal_param()
+    #         self.digest(self.eat(':'))
+    #         self.digest(self.identifier())
+    #         self.digest(self.eat(';'))
+    #         self.digest(self.block())
+    #         self.digest(self.eat(';'))
+    #         return self.digest(self.block())
+    #     if self.eat('begin'):
+    #         self.digest(self.command())  # TODO command
+    #         while self.command():
+    #             pass
+    #         return self.digest(self.eat('end'))  # End of block
+
     def identifier(self):
         if self.eat('identificador'):
             return True

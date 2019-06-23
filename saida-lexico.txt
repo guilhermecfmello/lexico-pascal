@@ -1,0 +1,824 @@
+< palavra reservada ,  program  >
+
+< identificador ,  MorseCoding  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  function  >
+
+< identificador ,  checkUserInput  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  userString  >
+
+< simbolo especial simples ,  :  >
+
+< palavra reservada ,  string  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  :  >
+
+< identificador ,  boolean  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  var  >
+
+< identificador ,  valid  >
+
+< simbolo especial simples ,  :  >
+
+< identificador ,  boolean  >
+
+< simbolo especial simples ,  ;  >
+
+< identificador ,  count  >
+
+< simbolo especial simples ,  :  >
+
+< identificador ,  integer  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  begin  >
+
+< identificador ,  valid  >
+
+< simbolo especial composto ,  :=  >
+
+< palavra reservada ,  true  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  for  >
+
+< identificador ,  count  >
+
+< simbolo especial composto ,  :=  >
+
+< numero inteiro ,  1  >
+
+< palavra reservada ,  to  >
+
+< identificador ,  length  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  userString  >
+
+< simbolo especial simples ,  )  >
+
+< palavra reservada ,  do  >
+
+< palavra reservada ,  if  >
+
+< simbolo especial simples ,  (  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  ord  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  userString  >
+
+< simbolo especial simples ,  [  >
+
+< identificador ,  count  >
+
+< simbolo especial simples ,  ]  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  <  >
+
+< numero inteiro ,  65  >
+
+< simbolo especial simples ,  )  >
+
+< palavra reservada ,  or  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  ord  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  userString  >
+
+< simbolo especial simples ,  [  >
+
+< identificador ,  count  >
+
+< simbolo especial simples ,  ]  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  >  >
+
+< numero inteiro ,  90  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  )  >
+
+< palavra reservada ,  and  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  userString  >
+
+< simbolo especial simples ,  [  >
+
+< identificador ,  count  >
+
+< simbolo especial simples ,  ]  >
+
+< simbolo especial composto ,  <>  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  )  >
+
+< palavra reservada ,  then  >
+
+< identificador ,  valid  >
+
+< simbolo especial composto ,  :=  >
+
+< identificador ,  false  >
+
+< simbolo especial simples ,  ;  >
+
+< identificador ,  checkUserInput  >
+
+< simbolo especial composto ,  :=  >
+
+< identificador ,  valid  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  end  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  function  >
+
+< identificador ,  getCharacterCode  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  character  >
+
+< simbolo especial simples ,  :  >
+
+< identificador ,  char  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  :  >
+
+< palavra reservada ,  string  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  const  >
+
+< identificador ,  translationArray  >
+
+< simbolo especial simples ,  :  >
+
+< palavra reservada ,  array  >
+
+< simbolo especial simples ,  [  >
+
+< numero real ,  0.  >
+
+< simbolo especial simples ,  .  >
+
+< numero inteiro ,  25  >
+
+< simbolo especial simples ,  ]  >
+
+< palavra reservada ,  of  >
+
+< palavra reservada ,  string  >
+
+< simbolo especial simples ,  =  >
+
+< simbolo especial simples ,  (  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  .  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ,  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial simples ,  -  >
+
+< simbolo especial composto ,  ..  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  begin  >
+
+< palavra reservada ,  if  >
+
+< identificador ,  character  >
+
+< simbolo especial simples ,  =  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  '  >
+
+< palavra reservada ,  then  >
+
+< identificador ,  getCharacterCode  >
+
+< simbolo especial composto ,  :=  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  '  >
+
+< palavra reservada ,  else  >
+
+< palavra reservada ,  begin  >
+
+< identificador ,  getCharacterCode  >
+
+< simbolo especial composto ,  :=  >
+
+< identificador ,  translationArray  >
+
+< simbolo especial simples ,  [  >
+
+< identificador ,  ord  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  character  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  -  >
+
+< numero inteiro ,  65  >
+
+< simbolo especial simples ,  ]  >
+
+< simbolo especial simples ,  +  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  end  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  end  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  procedure  >
+
+< identificador ,  main  >
+
+< simbolo especial simples ,  (  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  var  >
+
+< identificador ,  userString  >
+
+< simbolo especial simples ,  ,  >
+
+< identificador ,  codedString  >
+
+< simbolo especial simples ,  :  >
+
+< palavra reservada ,  string  >
+
+< simbolo especial simples ,  ;  >
+
+< identificador ,  count  >
+
+< simbolo especial simples ,  :  >
+
+< identificador ,  integer  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  begin  >
+
+< identificador ,  write  >
+
+< simbolo especial simples ,  (  >
+
+< simbolo especial simples ,  '  >
+
+< identificador ,  Enter  >
+
+< identificador ,  a  >
+
+< palavra reservada ,  string  >
+
+< simbolo especial simples ,  :  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  ;  >
+
+< identificador ,  readln  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  userString  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  if  >
+
+< identificador ,  checkUserInput  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  upcase  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  userString  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  )  >
+
+< palavra reservada ,  then  >
+
+< palavra reservada ,  begin  >
+
+< palavra reservada ,  for  >
+
+< identificador ,  count  >
+
+< simbolo especial composto ,  :=  >
+
+< numero inteiro ,  1  >
+
+< palavra reservada ,  to  >
+
+< identificador ,  length  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  userString  >
+
+< simbolo especial simples ,  )  >
+
+< palavra reservada ,  do  >
+
+< palavra reservada ,  begin  >
+
+< identificador ,  codedString  >
+
+< simbolo especial composto ,  :=  >
+
+< identificador ,  concat  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  codedString  >
+
+< simbolo especial simples ,  ,  >
+
+< identificador ,  getCharacterCode  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  upcase  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  userString  >
+
+< simbolo especial simples ,  [  >
+
+< identificador ,  count  >
+
+< simbolo especial simples ,  ]  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  end  >
+
+< simbolo especial simples ,  ;  >
+
+< identificador ,  writeln  >
+
+< simbolo especial simples ,  (  >
+
+< identificador ,  codedString  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  end  >
+
+< palavra reservada ,  else  >
+
+< identificador ,  writeln  >
+
+< simbolo especial simples ,  (  >
+
+< simbolo especial simples ,  '  >
+
+< identificador ,  Invalid  >
+
+< identificador ,  input  >
+
+< simbolo especial simples ,  '  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  end  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  begin  >
+
+< identificador ,  main  >
+
+< simbolo especial simples ,  (  >
+
+< simbolo especial simples ,  )  >
+
+< simbolo especial simples ,  ;  >
+
+< identificador ,  readln  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  end  >
+
+< simbolo especial simples ,  .  >
+
+Identificador [ checkUserInput ] armazenado no indice [ 6 ] da tabela
+
+Identificador [ input ] armazenado no indice [ 6 ] da tabela
+
+Identificador [ getCharacterCode ] armazenado no indice [ 33 ] da tabela
+
+Identificador [ userString ] armazenado no indice [ 39 ] da tabela
+
+Identificador [ translationArray ] armazenado no indice [ 43 ] da tabela
+
+Identificador [ readln ] armazenado no indice [ 46 ] da tabela
+
+Identificador [ ord ] armazenado no indice [ 52 ] da tabela
+
+Identificador [ main ] armazenado no indice [ 52 ] da tabela
+
+Identificador [ count ] armazenado no indice [ 60 ] da tabela
+
+Identificador [ false ] armazenado no indice [ 91 ] da tabela
+
+Identificador [ boolean ] armazenado no indice [ 92 ] da tabela
+
+Identificador [ a ] armazenado no indice [ 97 ] da tabela
+
+Identificador [ integer ] armazenado no indice [ 104 ] da tabela
+
+Identificador [ concat ] armazenado no indice [ 106 ] da tabela
+
+Identificador [ char ] armazenado no indice [ 148 ] da tabela
+
+Identificador [ upcase ] armazenado no indice [ 159 ] da tabela
+
+Identificador [ codedString ] armazenado no indice [ 167 ] da tabela
+
+Identificador [ length ] armazenado no indice [ 172 ] da tabela
+
+Identificador [ write ] armazenado no indice [ 177 ] da tabela
+
+Identificador [ Enter ] armazenado no indice [ 180 ] da tabela
+
+Identificador [ writeln ] armazenado no indice [ 202 ] da tabela
+
+Identificador [ MorseCoding ] armazenado no indice [ 231 ] da tabela
+
+Identificador [ valid ] armazenado no indice [ 246 ] da tabela
+
+Identificador [ Invalid ] armazenado no indice [ 246 ] da tabela
+
+Identificador [ character ] armazenado no indice [ 252 ] da tabela
+
