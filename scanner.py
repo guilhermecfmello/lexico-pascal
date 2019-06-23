@@ -1,5 +1,13 @@
+""""
+Equipe:
+Guilherme Mello
+Vinicius Carloto Carnelocce
+
+"""
 import re
 import sys
+
+from hash_symbol import HashTable
 
 
 class AFD:
@@ -44,8 +52,8 @@ class AFD:
 
         self.state_type = {(1, 2, 6, 8, 10, 12, 14, 16): 'simbolo especial simples',
                            (7, 9, 11, 13, 23): 'simbolo especial composto', (19,): 'identificador',
-                           (15, 18): 'numero inteiro positivo', (20, 22): 'numero real positivo',
-                           (17,): 'numero inteiro negativo', (21,): 'numero real negativo', (3,): 'comentario'}
+                           (15, 18): 'numero inteiro', (20, 22): 'numero real',
+                           (17,): 'numero inteiro', (21,): 'numero real', (3,): 'comentario'}
 
         self.scanned = list()  # Lista de tokens lidos
 
@@ -59,8 +67,7 @@ class AFD:
             line_count += 1
             if not line.strip():  # verifica se é uma linha vazia
                 continue
-
-            line = line.rstrip()  # Remove nova linha e espações à direita
+            line = line.rstrip()  # Remove nova linha e espaços à direita
             size = len(line)
             pos = 0
             while pos < size:
@@ -68,7 +75,6 @@ class AFD:
                 pos = token[0]
                 if token[1]:  # Verifica se há erro léxico
                     self.scanned.append(token[1])
-
                 else:
                     self.scanner_error(line_count, pos)
 
@@ -105,17 +111,18 @@ class AFD:
             if state == 3:  # Desconsidera os comentários
                 commentary = re.search('[\s\S]*\*\)', line[pos:])
                 if not commentary:
-                    return [pos, False]
+                    return [pos, False]  # Erro léxico
                 lexeme += commentary.group()
                 pos += commentary.end()
 
             if state == 19:  # Passa o identificador para a hash table
+
                 if not id_table.instalar_id(lexeme):
                     return [pos, ['palavra reservada', lexeme]]
 
             return [pos, [self.get_type(state), lexeme]]
         else:
-            return [pos, False]
+            return [pos, False]  # Erro léxico
 
     def get_column(self, c):
         """
@@ -167,3 +174,24 @@ class AFD:
         """
         for token in self.scanned:
             print("< {0} ,  {1}  >\n".format(token[0], token[1]))
+
+
+if __name__ == '__main__':
+
+    if len(sys.argv) < 2:
+        print("Modo de uso: python scanner.py arquivo")
+        sys.exit(1)
+
+    try:
+        file = open(sys.argv[1])
+    except IOError:
+        print("Erro na abertura do arquivo")
+        sys.exit(1)
+
+    scanner = AFD()
+    identifier_table = HashTable()
+
+    with file:
+        scanner.scan(file, identifier_table)
+        scanner.scanner_print()
+        identifier_table.hash_info()

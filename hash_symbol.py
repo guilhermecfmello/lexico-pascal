@@ -9,10 +9,14 @@ class HashTable:
     #             "repeat", "set", "shl", "shr", "string", "then", "to", "type", "unit", "until", "uses", "var", "while",
     #             "with", "xor", "and")
     keywords = (
-    "and", "array", "begin", "case", "const", "constructor", "destructor", "div", "do", "downto", "else", "end", "file",
-    "for", "function", "goto", "if", "inherited", "implementation", "in", "inline", "interface", "label", "mod", "nil",
-    "not", "object", "of", "or", "packed", "procedure", "program", "record", "repeat", "set", "shl", "shr", "string",
-    "then", "to", "type", "unit", "until", "uses", "var", "while", "with")
+    'and', 'array', 'asm', 'begin', 'case', 'const', 'constructor', 'continue', 'destructor', 'div', 'do', 'downto',
+    'else', 'end', 'file', 'for', 'function', 'goto', 'if', 'implementation', 'in', 'inline', 'interface', 'label',
+    'mod', 'nil', 'not', 'object', 'of', 'or', 'inherited', 'packed', 'procedure', 'program', 'record', 'repeat', 'set',
+    'shl', 'shr', 'string', 'then', 'to', 'true', 'type', 'unit', 'until', 'uses', 'var', 'while', 'with', 'xor', 'and',
+    'array', 'asm', 'begin', 'case', 'const', 'constructor', 'continue', 'destructor', 'div', 'do', 'downto', 'else',
+    'end', 'file', 'for', 'function', 'goto', 'if', 'implementation', 'in', 'inline', 'interface', 'label', 'mod',
+    'nil', 'not', 'object', 'of', 'or', 'inherited', 'packed', 'procedure', 'program', 'record', 'repeat', 'set', 'shl',
+    'shr', 'string', 'then', 'to', 'true', 'type', 'unit', 'until', 'uses', 'var', 'while', 'with', 'xor')
 
     def __init__(self):
         """
@@ -56,7 +60,7 @@ class HashTable:
             for i, data in enumerate(bucket):
                 index = self.hash_func(data)
                 aux = (data, index)
-                print("Identificador >> %s << armazenado no indice >> %d << da tabela" % aux)
+                print("Identificador [ %s ] armazenado no indice [ %d ] da tabela\n" % aux)
 
     # def delete(self, key):
     #     bucket = self.table[self.hash_func(key)]

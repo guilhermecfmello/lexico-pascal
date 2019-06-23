@@ -1,6 +1,5 @@
-program MorseCoding; (*la*)
+program MorseCoding (id,novo,mais,outro);
 
-funct_ion checkUserInput(user,String: string): boolean; <=
-var := 12 14.7 >=  = < <>
-  valid: boolean; -15   ..
-  count: integer; -15.89 . '',
+label 15,29;
+
+begin end.
