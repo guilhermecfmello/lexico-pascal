@@ -1,2 +1,4 @@
 program MorseCoding (id,novo,mais,outro);
-.
+label 123, 321;
+type banana = int ;
+var abacate: int

@@ -111,7 +111,7 @@ class Parser:
                 self.commandWithoutLabel()
     
     def expression(self):
-        self.simpleExpression():
+        self.simpleExpression()
         tempList = ['=','<>','<', '<=', '>=', '>']
 
         if any(item in self.current for item in tempList):
