@@ -1,5 +1,2 @@
 program MorseCoding (id,novo,mais,outro);
-
-label 15,29;
-
-begin end.
+.
