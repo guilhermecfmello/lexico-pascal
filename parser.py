@@ -79,7 +79,7 @@ class Parser:
             self.eat('type')
             self.identifier()
             self.eat('=')
-            self.type()  # TODO type
+            self.type()
             self.eat(';')
             while 'identificador' in self.current:
                 self.identifier()
@@ -95,7 +95,7 @@ class Parser:
             self.eat(':')
             self.type()
             self.eat(';')
-            while 'identificador' in  self.current:
+            while 'identificador' in self.current:
                 self.identifier()
                 while ',' in self.current:
                     self.eat(',')
@@ -111,7 +111,7 @@ class Parser:
             if ';' in self.current:
                 self.eat(';')
             else:
-                self.formal_param()  # TODO formal_param
+                self.formal_param()
             self.block()
             self.eat(';')
             return self.block()
@@ -132,10 +132,10 @@ class Parser:
 
         else:
             self.eat('begin')
-            self.command()  # TODO command
+            self.command()
             while 'end' not in self.current:
                 self.command()
-            self.eat('end') # End of block
+            self.eat('end')  # End of block
 
     def type(self):
         if 'identificador' in self.current:
@@ -207,15 +207,14 @@ class Parser:
 
         self.eat(')')
 
-        def command():
+    def command(self):
+        self.number()
+        while ':' in self.current:
+            self.eat(':')
             self.number()
-            while ':' in self.current:
-                self.eat(':')
-                self.number()
-            self.command_without_label()
+        self.command_no_label()
 
-
-    def commandWithoutLabel(self):
+    def command_no_label(self):
         if 'identificador' in self.current:
             self.identifier()
             if '[' in self.current:
@@ -250,20 +249,18 @@ class Parser:
             self.eat('if')
             self.expression()
             self.eat('then')
-            self.commandWithoutLabel()
-            if 'else' in current:
+            self.command_no_label()
+            if 'else' in self.current:
                 self.eat('else')
-                self.commandWithoutLabel()
+                self.command_no_label()
 
     def expression(self):
-        self.simpleExpression():
-        tempList = ['=','<>','<', '<=', '>=', '>']
-
-        if any(item in self.current for item in tempList):
+        self.simple_expression()
+        if any(item in self.current for item in ['=', '<>', '<', '<=', '>=', '>']):
             self.eat()
-            self.simpleExpression()
+            self.simple_expression()
 
-    def simpleExpression():
+    def simple_expression(self):
         if '+' in self.current:
             self.eat('+')
         elif '-' in self.current:
@@ -321,62 +318,6 @@ class Parser:
             self.eat('not')
             self.factor()
 
-
-
-
-
-
-    # def block(self):
-    #     if self.eat('label'):
-    #         self.digest(self.number())
-    #         while self.eat(','):
-    #             self.digest(self.number())
-    #         self.digest(self.eat(';'))
-    #         return self.digest(self.block())
-    #     if self.eat('type'):
-    #         self.digest(self.identifier())
-    #         self.digest(self.eat('='))
-    #         self.digest(self.type())  # TODO type
-    #         self.digest(self.eat(';'))
-    #         while self.identifier():
-    #             self.digest(self.eat(';'))
-    #         return self.digest(self.block())
-    #     if self.digest(self.eat('var')):
-    #         self.digest(self.identifier())
-    #         while self.eat(','):
-    #             self.digest(self.identifier())
-    #         self.digest(self.eat(':'))
-    #         self.digest(self.type())
-    #         self.digest(self.eat(';'))
-    #         while self.identifier():
-    #             while self.eat(','):
-    #                 self.digest(self.identifier())
-    #             self.digest(self.eat(':'))
-    #             self.digest(self.type())
-    #             self.digest(self.eat(';'))
-    #         return self.digest(self.block())
-    #     if self.eat('procedure'):
-    #         self.digest(self.identifier())
-    #         self.formal_param()  # TODO formal_param
-    #         self.digest(self.eat(';'))
-    #         self.digest(self.block())
-    #         self.digest(self.eat(';'))
-    #         return self.digest(self.block())
-    #     if self.eat('procedure'):
-    #         self.digest(self.identifier())
-    #         self.formal_param()
-    #         self.digest(self.eat(':'))
-    #         self.digest(self.identifier())
-    #         self.digest(self.eat(';'))
-    #         self.digest(self.block())
-    #         self.digest(self.eat(';'))
-    #         return self.digest(self.block())
-    #     if self.eat('begin'):
-    #         self.digest(self.command())  # TODO command
-    #         while self.command():
-    #             pass
-    #         return self.digest(self.eat('end'))  # End of block
-
     def identifier(self):
         if self.eat('identificador'):
             return True
@@ -384,7 +325,7 @@ class Parser:
             return False
 
     def number(self):
-        if any(elem in ['numero inteiro', 'numero real']  for elem in self.current):
+        if any(elem in ['numero inteiro', 'numero real'] for elem in self.current):
             self.eat()
             return True
         else:
