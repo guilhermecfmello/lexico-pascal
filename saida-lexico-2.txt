@@ -1,6 +1,6 @@
 < palavra reservada ,  program  >
 
-< identificador ,  MorseCoding  >
+< identificador ,  morsecoding  >
 
 < simbolo especial simples ,  (  >
 
@@ -22,9 +22,47 @@
 
 < simbolo especial simples ,  ;  >
 
+< palavra reservada ,  label  >
+
+< numero inteiro ,  123  >
+
+< simbolo especial simples ,  ,  >
+
+< numero inteiro ,  321  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  type  >
+
+< identificador ,  banana  >
+
+< simbolo especial simples ,  =  >
+
+< identificador ,  int  >
+
+< simbolo especial simples ,  ;  >
+
+< palavra reservada ,  var  >
+
+< identificador ,  abacate  >
+
+< simbolo especial simples ,  ,  >
+
+< identificador ,  laranja  >
+
+< simbolo especial simples ,  :  >
+
+< identificador ,  int  >
+
+< simbolo especial simples ,  ;  >
+
 < simbolo especial simples ,  .  >
 
 Identificador [ novo ] armazenado no indice [ 23 ] da tabela
+
+Identificador [ abacate ] armazenado no indice [ 25 ] da tabela
+
+Identificador [ laranja ] armazenado no indice [ 37 ] da tabela
 
 Identificador [ outro ] armazenado no indice [ 43 ] da tabela
 
@@ -32,5 +70,9 @@ Identificador [ mais ] armazenado no indice [ 57 ] da tabela
 
 Identificador [ id ] armazenado no indice [ 126 ] da tabela
 
-Identificador [ MorseCoding ] armazenado no indice [ 231 ] da tabela
+Identificador [ banana ] armazenado no indice [ 145 ] da tabela
+
+Identificador [ int ] armazenado no indice [ 196 ] da tabela
+
+Identificador [ morsecoding ] armazenado no indice [ 231 ] da tabela
 

@@ -16,7 +16,7 @@ class Parser:
         """
         Reporta um erro sintatico
         """
-        print('Erro sintatico: ' + str(self.scanned[self.pos]))
+        print('Erro sintatico: ' + str(self.current))
         sys.exit(1)
 
     @staticmethod
@@ -31,46 +31,190 @@ class Parser:
             self.current = self.scanned[self.pos]
             return True
 
-    def eat(self, match):
+    def eat(self, *match):
         """
         Caso o proximo token seja match,
         move pos para frente e retorna True,
         caso contrário, retorna False
         """
-        if match in self.current:
-            self.next()
-            return True
+        if match:
+            if match in self.current:
+                self.next()
+            else:
+                self.parsing_error()
         else:
-            self.parsing_error()
+            self.next()
 
     def parse(self):
         """
         Inicia a análise sintática
         """
         self.next()
-        if self.program():
-            return True
-        else:
-            return False
+        self.program()
 
     def program(self):
         self.eat('program')
         self.identifier()
         self.eat('(')
         self.identifier()
-        # print("\nprint: " + self.current[0]);
-        # print("\nprint: " + self.current[1]);
         while ',' in self.current:
             self.eat(',')
             self.identifier()
         self.eat(')')
         self.eat(';')
-        # self.digest(self.block())
-        return self.eat('.')  # End of program
+        self.block()
+        self.eat('.')  # End of program
 
- 
+    def block(self):
+        if 'label' in self.current:
+            self.eat('label')
+            self.number()
+            while ',' in self.current:
+                self.eat(',')
+                self.number()
+            self.eat(';')
+            return self.block()
 
-    def commandWithoutLabel(self):
+        elif 'type' in self.current:
+            self.eat('type')
+            self.identifier()
+            self.eat('=')
+            self.type()
+            self.eat(';')
+            while 'identificador' in self.current:
+                self.identifier()
+                self.eat(';')
+            return self.block()
+
+        elif 'var' in self.current:
+            self.eat('var')
+            self.identifier()
+            while ',' in self.current:
+                self.eat(',')
+                self.identifier()
+            self.eat(':')
+            self.type()
+            self.eat(';')
+            while 'identificador' in self.current:
+                self.identifier()
+                while ',' in self.current:
+                    self.eat(',')
+                    self.identifier()
+                self.eat(':')
+                self.type()
+                self.eat(';')
+            return self.block()
+
+        elif 'procedure' in self.current:
+            self.eat('procedure')
+            self.identifier()
+            if ';' in self.current:
+                self.eat(';')
+            else:
+                self.formal_param()
+            self.block()
+            self.eat(';')
+            return self.block()
+
+        elif 'function' in self.current:
+            self.eat('function')
+            self.identifier()
+            if ':' in self.current:
+                pass
+            else:
+                self.formal_param()
+            self.eat(':')
+            self.identifier()
+            self.eat(';')
+            self.block()
+            self.eat(';')
+            return self.block()
+
+        else:
+            self.eat('begin')
+            self.command()
+            while 'end' not in self.current:
+                self.command()
+            self.eat('end')  # End of block
+
+    def type(self):
+        if 'identificador' in self.current:
+            self.identifier()
+        else:
+            self.eat('array')
+            self.eat('[')
+            self.number()
+            self.eat('..')
+            self.number()
+            while ',' in self.current:
+                self.eat(',')
+                self.number()
+                self.eat('..')
+                self.number()
+            self.eat(']')
+            self.eat('of')
+            self.type()
+
+    def formal_param(self):
+        self.eat('(')
+        if 'function' in self.current:
+            self.eat('function')
+            while ',' in self.current:
+                self.eat(',')
+                self.identifier()
+            self.eat(':')
+            self.identifier()
+
+        elif 'procedure' in self.current:
+            self.identifier()
+            while ',' in self.current:
+                self.eat(',')
+                self.identifier()
+
+        else:
+            if 'var' in self.current:
+                self.eat('var')
+            while ',' in self.current:
+                self.eat(',')
+                self.identifier()
+            self.eat(':')
+            self.identifier()
+
+        while ';' in self.current:
+            self.eat(';')
+            if 'function' in self.current:
+                self.eat('function')
+                while ',' in self.current:
+                    self.eat(',')
+                    self.identifier()
+                self.eat(':')
+                self.identifier()
+
+            elif 'procedure' in self.current:
+                self.identifier()
+                while ',' in self.current:
+                    self.eat(',')
+                    self.identifier()
+
+            else:
+                if 'var' in self.current:
+                    self.eat('var')
+                while ',' in self.current:
+                    self.eat(',')
+                    self.identifier()
+                self.eat(':')
+                self.identifier()
+
+        self.eat(')')
+
+    def command(self):
+        self.number()
+        while ':' in self.current:
+            self.eat(':')
+            self.number()
+        self.command_no_label()
+
+    def command_no_label(self):
         if 'identificador' in self.current:
             self.identifier()
             if '[' in self.current:
@@ -105,20 +249,18 @@ class Parser:
             self.eat('if')
             self.expression()
             self.eat('then')
-            self.commandWithoutLabel()
-            if 'else' in current:
+            self.command_no_label()
+            if 'else' in self.current:
                 self.eat('else')
-                self.commandWithoutLabel()
-    
-    def expression(self):
-        self.simpleExpression()
-        tempList = ['=','<>','<', '<=', '>=', '>']
+                self.command_no_label()
 
-        if any(item in self.current for item in tempList):
+    def expression(self):
+        self.simple_expression()
+        if any(item in self.current for item in ['=', '<>', '<', '<=', '>=', '>']):
             self.eat()
-            self.simpleExpression()
-    
-    def simpleExpression():
+            self.simple_expression()
+
+    def simple_expression(self):
         if '+' in self.current:
             self.eat('+')
         elif '-' in self.current:
@@ -134,7 +276,7 @@ class Parser:
             elif 'or' in self.current:
                 self.eat('or')
             self.term()
-        
+
     def term(self):
         self.factor()
         while '*' in self.current or 'div' in self.current or 'and' in self.current:
@@ -145,7 +287,7 @@ class Parser:
             elif 'and' in self.current:
                 self.eat('and')
             self.factor()
-        
+
     def factor(self):
         if 'identificador' in self.current:
             self.identifier()
@@ -175,62 +317,6 @@ class Parser:
         elif 'not' in self.current:
             self.eat('not')
             self.factor()
-        
-        
-                
-
-
-
-    # def block(self):
-    #     if self.eat('label'):
-    #         self.digest(self.number())
-    #         while self.eat(','):
-    #             self.digest(self.number())
-    #         self.digest(self.eat(';'))
-    #         return self.digest(self.block())
-    #     if self.eat('type'):
-    #         self.digest(self.identifier())
-    #         self.digest(self.eat('='))
-    #         self.digest(self.type())  # TODO type
-    #         self.digest(self.eat(';'))
-    #         while self.identifier():
-    #             self.digest(self.eat(';'))
-    #         return self.digest(self.block())
-    #     if self.digest(self.eat('var')):
-    #         self.digest(self.identifier())
-    #         while self.eat(','):
-    #             self.digest(self.identifier())
-    #         self.digest(self.eat(':'))
-    #         self.digest(self.type())
-    #         self.digest(self.eat(';'))
-    #         while self.identifier():
-    #             while self.eat(','):
-    #                 self.digest(self.identifier())
-    #             self.digest(self.eat(':'))
-    #             self.digest(self.type())
-    #             self.digest(self.eat(';'))
-    #         return self.digest(self.block())
-    #     if self.eat('procedure'):
-    #         self.digest(self.identifier())
-    #         self.formal_param()  # TODO formal_param
-    #         self.digest(self.eat(';'))
-    #         self.digest(self.block())
-    #         self.digest(self.eat(';'))
-    #         return self.digest(self.block())
-    #     if self.eat('procedure'):
-    #         self.digest(self.identifier())
-    #         self.formal_param()
-    #         self.digest(self.eat(':'))
-    #         self.digest(self.identifier())
-    #         self.digest(self.eat(';'))
-    #         self.digest(self.block())
-    #         self.digest(self.eat(';'))
-    #         return self.digest(self.block())
-    #     if self.eat('begin'):
-    #         self.digest(self.command())  # TODO command
-    #         while self.command():
-    #             pass
-    #         return self.digest(self.eat('end'))  # End of block
 
     def identifier(self):
         if self.eat('identificador'):
@@ -239,7 +325,8 @@ class Parser:
             return False
 
     def number(self):
-        if self.eat('numero inteiro') or self.eat('numero real'):
+        if any(elem in ['numero inteiro', 'numero real'] for elem in self.current):
+            self.eat()
             return True
         else:
             return False
@@ -266,7 +353,4 @@ if __name__ == '__main__':
             lexeme = re.search("<([a-z\s]*),([\S\s]*)>", line)
             if lexeme:
                 parser.scanned.append([lexeme.group(1).strip(), lexeme.group(2).strip()])
-        if parser.parse():
-            parser.parsing_end()
-        else:
-            parser.parsing_error()
+        parser.parse()
