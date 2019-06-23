@@ -1,2 +1,2 @@
-program MorseCoding (id,novo,mais,outro);
+program MorseCoding (qqrcoisa);
 .
