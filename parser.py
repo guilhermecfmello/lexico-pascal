@@ -109,10 +109,9 @@ class Parser:
         elif 'procedure' in self.current:
             self.eat('procedure')
             self.identifier()
-            if ';' in self.current:
-                self.eat(';')
-            else:
+            if ';' not in self.current:
                 self.formal_param()
+            self.eat(';')
             self.block()
             self.eat(';')
             self.block()
