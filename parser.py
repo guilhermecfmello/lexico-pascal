@@ -234,17 +234,17 @@ class Parser:
                     self.eat(',')
                     self.expression()
                 self.eat(')')
-            else:
-                if '[' in self.current:
-                    self.eat('[')
+            elif '[' in self.current:
+                self.eat('[')
+                self.expression()
+                while ',' in self.current:
+                    self.eat(',')
                     self.expression()
-                    while ',' in self.current:
-                        self.eat(',')
-                        self.expression()
-                    self.eat(']')
+                self.eat(']')
                 self.eat(':=')
                 self.expression()
-
+            else:
+                self.eat('identificador')
         elif 'goto' in self.current:
             self.eat('goto')
             self.number()
