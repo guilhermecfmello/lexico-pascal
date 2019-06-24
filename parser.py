@@ -227,14 +227,7 @@ class Parser:
     def command_no_label(self):
         if 'identificador' in self.current:
             self.identifier()
-            if '(' in self.current:
-                self.eat('(')
-                self.expression()
-                while ',' in self.current:
-                    self.eat(',')
-                    self.expression()
-                self.eat(')')
-            elif '[' in self.current:
+            if '[' in self.current:
                 self.eat('[')
                 self.expression()
                 while ',' in self.current:
@@ -243,8 +236,19 @@ class Parser:
                 self.eat(']')
                 self.eat(':=')
                 self.expression()
+            elif '(' in self.current:
+                self.eat('(')
+                self.expression()
+                while ',' in self.current:
+                    self.eat(',')
+                    self.expression()
+                self.eat(')')
+            elif ':=' in self.current:
+                self.eat(':=')
+                self.expression()
             else:
-                self.eat('identificador')
+                pass
+
         elif 'goto' in self.current:
             self.eat('goto')
             self.number()
