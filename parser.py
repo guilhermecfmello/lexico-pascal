@@ -139,6 +139,7 @@ class Parser:
                 self.eat(';')
                 self.command()
             self.eat('end')  # End of block
+            #teste
 
 
     def type(self):
