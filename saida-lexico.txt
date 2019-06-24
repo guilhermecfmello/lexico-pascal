@@ -2,6 +2,12 @@
 
 < identificador ,  MorseCoding  >
 
+< simbolo especial simples ,  (  >
+
+< identificador ,  id  >
+
+< simbolo especial simples ,  )  >
+
 < simbolo especial simples ,  ;  >
 
 < palavra reservada ,  function  >
@@ -14,7 +20,7 @@
 
 < simbolo especial simples ,  :  >
 
-< palavra reservada ,  string  >
+< identificador ,  string  >
 
 < simbolo especial simples ,  )  >
 
@@ -182,7 +188,7 @@
 
 < simbolo especial simples ,  :  >
 
-< palavra reservada ,  string  >
+< identificador ,  string  >
 
 < simbolo especial simples ,  ;  >
 
@@ -206,7 +212,7 @@
 
 < palavra reservada ,  of  >
 
-< palavra reservada ,  string  >
+< identificador ,  string  >
 
 < simbolo especial simples ,  =  >
 
@@ -594,7 +600,7 @@
 
 < simbolo especial simples ,  :  >
 
-< palavra reservada ,  string  >
+< identificador ,  string  >
 
 < simbolo especial simples ,  ;  >
 
@@ -618,7 +624,7 @@
 
 < identificador ,  a  >
 
-< palavra reservada ,  string  >
+< identificador ,  string  >
 
 < simbolo especial simples ,  :  >
 
@@ -780,6 +786,8 @@ Identificador [ getCharacterCode ] armazenado no indice [ 33 ] da tabela
 
 Identificador [ userString ] armazenado no indice [ 39 ] da tabela
 
+Identificador [ string ] armazenado no indice [ 39 ] da tabela
+
 Identificador [ translationArray ] armazenado no indice [ 43 ] da tabela
 
 Identificador [ readln ] armazenado no indice [ 46 ] da tabela
@@ -799,6 +807,8 @@ Identificador [ a ] armazenado no indice [ 97 ] da tabela
 Identificador [ integer ] armazenado no indice [ 104 ] da tabela
 
 Identificador [ concat ] armazenado no indice [ 106 ] da tabela
+
+Identificador [ id ] armazenado no indice [ 126 ] da tabela
 
 Identificador [ char ] armazenado no indice [ 148 ] da tabela
 

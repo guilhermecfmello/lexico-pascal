@@ -1,4 +1,4 @@
-program MorseCoding;
+program MorseCoding (id);
 
 function checkUserInput(userString: string): boolean;
 var

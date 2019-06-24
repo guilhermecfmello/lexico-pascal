@@ -12,11 +12,11 @@ class HashTable:
     'and', 'array', 'asm', 'begin', 'case', 'const', 'constructor', 'continue', 'destructor', 'div', 'do', 'downto',
     'else', 'end', 'file', 'for', 'function', 'goto', 'if', 'implementation', 'in', 'inline', 'interface', 'label',
     'mod', 'nil', 'not', 'object', 'of', 'or', 'inherited', 'packed', 'procedure', 'program', 'record', 'repeat', 'set',
-    'shl', 'shr', 'string', 'then', 'to', 'true', 'type', 'unit', 'until', 'uses', 'var', 'while', 'with', 'xor', 'and',
+    'shl', 'shr', 'then', 'to', 'true', 'type', 'unit', 'until', 'uses', 'var', 'while', 'with', 'xor', 'and',
     'array', 'asm', 'begin', 'case', 'const', 'constructor', 'continue', 'destructor', 'div', 'do', 'downto', 'else',
     'end', 'file', 'for', 'function', 'goto', 'if', 'implementation', 'in', 'inline', 'interface', 'label', 'mod',
     'nil', 'not', 'object', 'of', 'or', 'inherited', 'packed', 'procedure', 'program', 'record', 'repeat', 'set', 'shl',
-    'shr', 'string', 'then', 'to', 'true', 'type', 'unit', 'until', 'uses', 'var', 'while', 'with', 'xor')
+    'shr', 'then', 'to', 'true', 'type', 'unit', 'until', 'uses', 'var', 'while', 'with', 'xor')
 
     def __init__(self):
         """

@@ -28,6 +28,7 @@ class Parser:
             return False
         else:
             self.pos += 1
+            print(str(self.current))
             self.current = self.scanned[self.pos]
             return True
 
@@ -38,7 +39,7 @@ class Parser:
         caso contrário, retorna False
         """
         if match:
-            if match in self.current:
+            if match[0] in self.current:
                 self.next()
             else:
                 self.parsing_error()
@@ -73,7 +74,7 @@ class Parser:
                 self.eat(',')
                 self.number()
             self.eat(';')
-            return self.block()
+            self.block()
 
         elif 'type' in self.current:
             self.eat('type')
@@ -84,7 +85,7 @@ class Parser:
             while 'identificador' in self.current:
                 self.identifier()
                 self.eat(';')
-            return self.block()
+            self.block()
 
         elif 'var' in self.current:
             self.eat('var')
@@ -103,7 +104,7 @@ class Parser:
                 self.eat(':')
                 self.type()
                 self.eat(';')
-            return self.block()
+            self.block()
 
         elif 'procedure' in self.current:
             self.eat('procedure')
@@ -114,7 +115,7 @@ class Parser:
                 self.formal_param()
             self.block()
             self.eat(';')
-            return self.block()
+            self.block()
 
         elif 'function' in self.current:
             self.eat('function')
@@ -128,14 +129,17 @@ class Parser:
             self.eat(';')
             self.block()
             self.eat(';')
-            return self.block()
+            self.block()
 
         else:
             self.eat('begin')
             self.command()
+            print("Antes do loop comando: " + self.current[1])
             while 'end' not in self.current:
+                self.eat(';')
                 self.command()
             self.eat('end')  # End of block
+
 
     def type(self):
         if 'identificador' in self.current:
@@ -159,6 +163,7 @@ class Parser:
         self.eat('(')
         if 'function' in self.current:
             self.eat('function')
+            self.identifier()
             while ',' in self.current:
                 self.eat(',')
                 self.identifier()
@@ -166,6 +171,7 @@ class Parser:
             self.identifier()
 
         elif 'procedure' in self.current:
+            self.eat('procedure')
             self.identifier()
             while ',' in self.current:
                 self.eat(',')
@@ -174,6 +180,7 @@ class Parser:
         else:
             if 'var' in self.current:
                 self.eat('var')
+            self.identifier()
             while ',' in self.current:
                 self.eat(',')
                 self.identifier()
@@ -184,6 +191,7 @@ class Parser:
             self.eat(';')
             if 'function' in self.current:
                 self.eat('function')
+                self.identifier()
                 while ',' in self.current:
                     self.eat(',')
                     self.identifier()
@@ -191,6 +199,7 @@ class Parser:
                 self.identifier()
 
             elif 'procedure' in self.current:
+                self.eat('procedure')
                 self.identifier()
                 while ',' in self.current:
                     self.eat(',')
@@ -199,6 +208,7 @@ class Parser:
             else:
                 if 'var' in self.current:
                     self.eat('var')
+                self.identifier()
                 while ',' in self.current:
                     self.eat(',')
                     self.identifier()
@@ -208,25 +218,15 @@ class Parser:
         self.eat(')')
 
     def command(self):
-        self.number()
-        while ':' in self.current:
-            self.eat(':')
+        if any(elem in self.current for elem in ['numero inteiro', 'numero real']):
             self.number()
+            self.eat(':')
         self.command_no_label()
 
     def command_no_label(self):
         if 'identificador' in self.current:
             self.identifier()
-            if '[' in self.current:
-                self.eat('[')
-                self.expression()
-                while ',' in self.current:
-                    self.eat(',')
-                    self.expression()
-                self.eat(']')
-                self.eat(':=')
-                self.expression()
-            elif '(' in self.current:
+            if '(' in self.current:
                 self.eat('(')
                 self.expression()
                 while ',' in self.current:
@@ -234,7 +234,16 @@ class Parser:
                     self.expression()
                 self.eat(')')
             else:
-                pass
+                if '[' in self.current:
+                    self.eat('[')
+                    self.expression()
+                    while ',' in self.current:
+                        self.eat(',')
+                        self.expression()
+                    self.eat(']')
+                self.eat(':=')
+                self.expression()
+
         elif 'goto' in self.current:
             self.eat('goto')
             self.number()
@@ -259,6 +268,7 @@ class Parser:
         if any(item in self.current for item in ['=', '<>', '<', '<=', '>=', '>']):
             self.eat()
             self.simple_expression()
+        
 
     def simple_expression(self):
         if '+' in self.current:
@@ -269,12 +279,7 @@ class Parser:
         self.term()
 
         while '+' in self.current or '-' in self.current or 'or' in self.current:
-            if '+' in self.current:
-                self.eat('+')
-            elif '-' in self.current:
-                self.eat('-')
-            elif 'or' in self.current:
-                self.eat('or')
+            self.eat()
             self.term()
 
     def term(self):
@@ -308,7 +313,7 @@ class Parser:
                     self.eat(')')
             else:
                 pass
-        elif 'numero inteiro' in self.current or 'numero real' in self.current:
+        elif any(elem in self.current for elem in ['numero inteiro', 'numero real']):
             self.number()
         elif '(' in self.current:
             self.eat('(')
@@ -317,6 +322,11 @@ class Parser:
         elif 'not' in self.current:
             self.eat('not')
             self.factor()
+        elif 'true':
+            self.eat('true')
+        elif 'false':
+            self.eat('false')
+
 
     def identifier(self):
         if self.eat('identificador'):
@@ -325,7 +335,7 @@ class Parser:
             return False
 
     def number(self):
-        if any(elem in ['numero inteiro', 'numero real'] for elem in self.current):
+        if any(elem in self.current for elem in ['numero inteiro', 'numero real']):
             self.eat()
             return True
         else:
