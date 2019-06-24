@@ -135,12 +135,12 @@ class Parser:
             self.eat('begin')
             self.command()
             print("Antes do loop comando: " + self.current[1])
-            while 'end' not in self.current:
+            while ';' in self.current:
                 self.eat(';')
                 self.command()
+                print('here')
             self.eat('end')  # End of block
-            #teste
-
+            # teste
 
     def type(self):
         if 'identificador' in self.current:
@@ -268,13 +268,12 @@ class Parser:
             self.expression()
             self.eat('do')
             self.command_no_label()
-            
+
     def expression(self):
         self.simple_expression()
         if any(item in self.current for item in ['=', '<>', '<', '<=', '>=', '>']):
             self.eat()
             self.simple_expression()
-        
 
     def simple_expression(self):
         if '+' in self.current:
@@ -332,7 +331,6 @@ class Parser:
             self.eat('true')
         elif 'false':
             self.eat('false')
-
 
     def identifier(self):
         if self.eat('identificador'):

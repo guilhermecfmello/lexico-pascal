@@ -74,7 +74,8 @@ class AFD:
                 token = self.next_word(line, pos, size, id_table)
                 pos = token[0]
                 if token[1]:  # Verifica se há erro léxico
-                    self.scanned.append(token[1])
+                    if token[1][0] != 'comentario':
+                        self.scanned.append(token[1])
                 else:
                     self.scanner_error(line_count, pos)
 
