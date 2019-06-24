@@ -263,7 +263,12 @@ class Parser:
             if 'else' in self.current:
                 self.eat('else')
                 self.command_no_label()
-
+        elif 'while':
+            self.eat('while')
+            self.expression()
+            self.eat('do')
+            self.command_no_label()
+            
     def expression(self):
         self.simple_expression()
         if any(item in self.current for item in ['=', '<>', '<', '<=', '>=', '>']):
