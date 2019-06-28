@@ -1,34 +1,34 @@
-import re
 import sys
 
 
 class Parser:
 
-    def __init__(self):
+    def __init__(self, scanner_output):
         """
         Inicializa as estruturas do parser
         """
-        self.scanned = list()  # Lista de tokens do scanner
+        self.scanned = scanner_output  # Lista de tokens do scanner
         self.pos = -1  # Inicializa em -1, para iterar em 0
         self.current = ''  # Guarda o token atual
 
     def parsing_error(self):
         """
         Reporta um erro sintatico
+
         """
-        print('Erro sintatico: ' + str(self.current))
+        print("\n  Erro sintático\n\n    linha {0} coluna {1}\n".format(self.current[2], self.current[3]))
         sys.exit(1)
 
     @staticmethod
     def parsing_end():
-        print('Sucesso!')
+        print('  Compilado sem erros sintáticos\n')
 
     def next(self):
         if self.pos + 1 >= len(self.scanned):
             return False
         else:
             self.pos += 1
-            print(str(self.current))
+            # print(str(self.current))
             self.current = self.scanned[self.pos]
             return True
 
@@ -52,6 +52,7 @@ class Parser:
         """
         self.next()
         self.program()
+        self.parsing_end()
 
     def program(self):
         self.eat('program')
@@ -133,13 +134,10 @@ class Parser:
         else:
             self.eat('begin')
             self.command()
-            print("Antes do loop comando: " + self.current[1])
             while ';' in self.current:
                 self.eat(';')
                 self.command()
-                print('here')
             self.eat('end')  # End of block
-            # teste
 
     def type(self):
         if 'identificador' in self.current:
@@ -266,7 +264,8 @@ class Parser:
             if 'else' in self.current:
                 self.eat('else')
                 self.command_no_label()
-        elif 'while':
+        # elif 'while':
+        else:
             self.eat('while')
             self.expression()
             self.eat('do')
@@ -330,9 +329,10 @@ class Parser:
         elif 'not' in self.current:
             self.eat('not')
             self.factor()
-        elif 'true':
+        elif 'true' in self.current:
             self.eat('true')
-        elif 'false':
+        # elif 'false' in self.current:
+        else:
             self.eat('false')
 
     def identifier(self):
@@ -349,25 +349,25 @@ class Parser:
             return False
 
 
-if __name__ == '__main__':
-
-    if len(sys.argv) < 2:
-        print("Modo de uso: python parser.py arquivo")
-        sys.exit(1)
-
-    try:
-        file = open(sys.argv[1])
-    except IOError:
-        print("Erro na abertura do arquivo")
-        sys.exit(1)
-
-    parser = Parser()
-
-    with file:
-        line_count = 0
-        for line in file:
-            line_count += 1
-            lexeme = re.search("<([a-z\s]*),([\S\s]*)>", line)
-            if lexeme:
-                parser.scanned.append([lexeme.group(1).strip(), lexeme.group(2).strip()])
-        parser.parse()
+# if __name__ == '__main__':
+#
+#     if len(sys.argv) < 2:
+#         print("Modo de uso: python parser.py arquivo")
+#         sys.exit(1)
+#
+#     try:
+#         file = open(sys.argv[1])
+#     except IOError:
+#         print("Erro na abertura do arquivo")
+#         sys.exit(1)
+#
+#     parser = Parser()
+#
+#     with file:
+#         line_count = 0
+#         for line in file:
+#             line_count += 1
+#             lexeme = re.search("<([a-z\s]*),([\S\s]*)>", line)
+#             if lexeme:
+#                 parser.scanned.append([lexeme.group(1).strip(), lexeme.group(2).strip()])
+#         parser.parse()

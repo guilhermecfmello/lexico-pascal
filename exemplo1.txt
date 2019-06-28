@@ -7,6 +7,6 @@ begin
      do begin
         s:= s + m*m;
         write(m,s);
-        m:=m+ 1
+        m:=m+11
      end
 end.

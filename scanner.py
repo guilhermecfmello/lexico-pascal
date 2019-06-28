@@ -1,13 +1,5 @@
-""""
-Equipe:
-Guilherme Mello
-Vinicius Carloto Carnelocce
-
-"""
 import re
 import sys
-
-from hash_symbol import HashTable
 
 
 class AFD:
@@ -35,9 +27,9 @@ class AFD:
             [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 11
             [-1, -1, -1, -1, -1, -1, -1, -1, 13, -1, -1, -1, -1, -1, -1],  # Estado 12
             [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 13
-            [-1, -1, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 14
+            [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 14
             [-1, -1, 15, -1, -1, 20, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 15
-            [-1, -1, 17, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 16
+            [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 16
             [-1, -1, 17, -1, -1, 21, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 17
             [-1, -1, 18, -1, -1, 22, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 18
             [-1, 19, 19, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],  # Estado 19
@@ -75,9 +67,12 @@ class AFD:
                 pos = token[0]
                 if token[1]:  # Verifica se há erro léxico
                     if token[1][0] != 'comentario':
+                        token[1].extend((line_count, pos))
                         self.scanned.append(token[1])
                 else:
-                    self.scanner_error(line_count, pos)
+                    self.scanning_error(line_count, pos)
+        self.scanner_print()
+        self.scanning_end()
 
     def next_word(self, line, pos, size, id_table):
         """
@@ -161,7 +156,7 @@ class AFD:
             return False
 
     @staticmethod
-    def scanner_error(line_count, pos):
+    def scanning_error(line_count, pos):
         """
         Printa para o usuario a informação sobre o erro léxico,
         contendo a linha do erro, e a respectiva coluna
@@ -169,30 +164,13 @@ class AFD:
         print("\n  Erro léxico\n\n    linha {0} coluna {1}\n".format(line_count, pos + 1))
         sys.exit(1)
 
+    @staticmethod
+    def scanning_end():
+        print('  Compilado sem erros léxicos\n')
+
     def scanner_print(self):
         """
         Printa os tokens reconhecidos pelo scanner
         """
         for token in self.scanned:
             print("< {0} ,  {1}  >\n".format(token[0], token[1]))
-
-
-if __name__ == '__main__':
-
-    if len(sys.argv) < 2:
-        print("Modo de uso: python scanner.py arquivo")
-        sys.exit(1)
-
-    try:
-        file = open(sys.argv[1])
-    except IOError:
-        print("Erro na abertura do arquivo")
-        sys.exit(1)
-
-    scanner = AFD()
-    identifier_table = HashTable()
-
-    with file:
-        scanner.scan(file, identifier_table)
-        scanner.scanner_print()
-        identifier_table.hash_info()
