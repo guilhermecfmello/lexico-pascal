@@ -1,6 +1,35 @@
 import sys
 
 
+class AST:
+    def __init__(self):
+        self.tree = []
+        self.current = self.tree
+        self.levels = [self.tree]
+
+    def add_curr(self, *args):
+        self.current.extend(args)
+        if type(self.current[-1]) is list:
+            self.current = self.current[-1]
+
+    def add_level(self, *args):
+        self.current.extend(args)
+        self.levels.append(self.current)
+        self.add_curr([])
+
+    def del_level(self, *args):
+        self.current = self.levels.pop()
+        if args:
+            self.current.extend(args)
+
+    def print_tree(self, node, level=0):
+        for value in node:
+            if type(value) is list:
+                self.print_tree(value, level + 1)
+            else:
+                print("\t" * level + value)
+
+
 class Parser:
 
     def __init__(self, scanner_output):
@@ -10,11 +39,11 @@ class Parser:
         self.scanned = scanner_output  # Lista de tokens do scanner
         self.pos = -1  # Inicializa em -1, para iterar em 0
         self.current = ''  # Guarda o token atual
+        self.ast = AST()
 
     def parsing_error(self):
         """
         Reporta um erro sintatico
-
         """
         print("\n  Erro sintático\n\n    linha {0} coluna {1}\n".format(self.current[2], self.current[3]))
         sys.exit(1)
@@ -56,6 +85,7 @@ class Parser:
 
     def program(self):
         self.eat('program')
+        self.ast.add_level('program')
         self.identifier()
         self.eat('(')
         self.identifier()
@@ -66,30 +96,37 @@ class Parser:
         self.eat(';')
         self.block()
         self.eat('.')  # End of program
+        self.ast.print_tree(self.ast.tree)
 
     def block(self):
         if 'label' in self.current:
             self.eat('label')
+            self.ast.add_level('label')
             self.number()
             while ',' in self.current:
                 self.eat(',')
                 self.number()
             self.eat(';')
+            self.ast.del_level()
             self.block()
 
         elif 'type' in self.current:
             self.eat('type')
+            self.ast.add_level('type')
             self.identifier()
             self.eat('=')
+            self.ast.add_curr('=')
             self.type()
             self.eat(';')
             while 'identificador' in self.current:
                 self.identifier()
                 self.eat(';')
+            self.ast.del_level()
             self.block()
 
         elif 'var' in self.current:
             self.eat('var')
+            self.ast.add_level('var')
             self.identifier()
             while ',' in self.current:
                 self.eat(',')
@@ -105,20 +142,24 @@ class Parser:
                 self.eat(':')
                 self.type()
                 self.eat(';')
+            self.ast.del_level()
             self.block()
 
         elif 'procedure' in self.current:
             self.eat('procedure')
+            self.ast.add_level('procedure')
             self.identifier()
             if ';' not in self.current:
                 self.formal_param()
             self.eat(';')
             self.block()
             self.eat(';')
+            self.ast.del_level()
             self.block()
 
         elif 'function' in self.current:
             self.eat('function')
+            self.ast.add_level('fucntion')
             self.identifier()
             if ':' in self.current:
                 pass
@@ -129,89 +170,111 @@ class Parser:
             self.eat(';')
             self.block()
             self.eat(';')
+            self.ast.del_level()
             self.block()
 
         else:
             self.eat('begin')
+            self.ast.add_level('begin')
             self.command()
             while ';' in self.current:
                 self.eat(';')
                 self.command()
             self.eat('end')  # End of block
+            self.ast.del_level('end')
 
     def type(self):
         if 'identificador' in self.current:
             self.identifier()
         else:
             self.eat('array')
+            self.ast.add_level('array')
             self.eat('[')
             self.number()
             self.eat('..')
+            self.ast.add_curr('..')
             self.number()
             while ',' in self.current:
                 self.eat(',')
                 self.number()
                 self.eat('..')
+                self.ast.add_curr('..')
                 self.number()
             self.eat(']')
             self.eat('of')
+            self.ast.add_curr('of')
             self.type()
+            self.ast.del_level()
 
     def formal_param(self):
         self.eat('(')
         if 'function' in self.current:
             self.eat('function')
+            self.ast.add_level('function')
             self.identifier()
             while ',' in self.current:
                 self.eat(',')
                 self.identifier()
             self.eat(':')
             self.identifier()
+            self.ast.del_level()
 
         elif 'procedure' in self.current:
             self.eat('procedure')
+            self.ast.add_level('procedure')
             self.identifier()
             while ',' in self.current:
                 self.eat(',')
                 self.identifier()
+            self.ast.del_level()
 
         else:
             if 'var' in self.current:
                 self.eat('var')
+                self.ast.add_curr('var')
+            self.ast.add_level()
             self.identifier()
             while ',' in self.current:
                 self.eat(',')
                 self.identifier()
             self.eat(':')
             self.identifier()
+            self.ast.del_level()
 
         while ';' in self.current:
             self.eat(';')
             if 'function' in self.current:
                 self.eat('function')
+                self.ast.add_level('function')
                 self.identifier()
                 while ',' in self.current:
                     self.eat(',')
                     self.identifier()
                 self.eat(':')
                 self.identifier()
+                self.ast.del_level()
 
             elif 'procedure' in self.current:
                 self.eat('procedure')
+                self.ast.add_level('procedure')
                 self.identifier()
                 while ',' in self.current:
                     self.eat(',')
                     self.identifier()
+                self.ast.del_level()
 
             else:
                 if 'var' in self.current:
                     self.eat('var')
+                    self.ast.add_curr('var')
+                self.ast.add_level()
                 self.identifier()
                 while ',' in self.current:
                     self.eat(',')
                     self.identifier()
                 self.eat(':')
                 self.identifier()
+                self.ast.del_level()
 
         self.eat(')')
 
@@ -223,6 +286,7 @@ class Parser:
 
     def command_no_label(self):
         if 'identificador' in self.current:
+            self.ast.add_level()
             self.identifier()
             if '[' in self.current:
                 self.eat('[')
@@ -245,6 +309,7 @@ class Parser:
                 self.expression()
             else:
                 pass
+            self.ast.del_level()
 
         elif 'goto' in self.current:
             self.eat('goto')
@@ -336,18 +401,19 @@ class Parser:
             self.eat('false')
 
     def identifier(self):
+        self.ast.add_curr(self.current[1])
         if self.eat('identificador'):
             return True
         else:
             return False
 
     def number(self):
+        self.ast.add_curr(self.current[1])
         if any(elem in self.current for elem in ['numero inteiro', 'numero real']):
             self.eat()
             return True
         else:
             return False
-
 
 # if __name__ == '__main__':
 #
