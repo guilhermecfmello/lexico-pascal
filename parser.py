@@ -313,50 +313,66 @@ class Parser:
 
         elif 'goto' in self.current:
             self.eat('goto')
+            self.ast.add_level('goto')
             self.number()
+            self.ast.del_level()
         elif 'begin' in self.current:
             self.eat('begin')
+            self.ast.add_level('begin')
             self.command()
             while ';' in self.current:
                 self.eat(';')
                 self.command()
             self.eat('end')
+            self.ast.del_level('end')
         elif 'if' in self.current:
             self.eat('if')
+            self.ast.add_level('if')
             self.expression()
             self.eat('then')
+            self.ast.add_curr('then')
             self.command_no_label()
             if 'else' in self.current:
                 self.eat('else')
+                self.ast.add_curr('else')
                 self.command_no_label()
+            self.ast.del_level()
         # elif 'while':
         else:
             self.eat('while')
+            self.ast.add_level('while')
             self.expression()
             self.eat('do')
+            self.ast.add_curr('do')
             self.command_no_label()
+            self.ast.del_level()
 
     def expression(self):
         self.simple_expression()
         if any(item in self.current for item in ['=', '<>', '<', '<=', '>=', '>']):
+            self.ast.add_curr(self.current[1])
             self.eat()
             self.simple_expression()
 
     def simple_expression(self):
         if '+' in self.current:
             self.eat('+')
+            self.ast.add_curr('+')
         elif '-' in self.current:
             self.eat('-')
+            self.ast.add_curr('-')
 
         self.term()
 
         while '+' in self.current or '-' in self.current or 'or' in self.current:
+            self.ast.add_curr(self.current[1])
             self.eat()
             self.term()
 
     def term(self):
         self.factor()
         while '*' in self.current or 'div' in self.current or 'and' in self.current:
+            self.ast.add_curr(self.current[1])
             if '*' in self.current:
                 self.eat('*')
             elif 'div' in self.current:
@@ -368,6 +384,7 @@ class Parser:
     def factor(self):
         if 'identificador' in self.current:
             self.identifier()
+            self.ast.add_level()
             if '[' in self.current:
                 self.eat('[')
                 self.expression()
@@ -393,12 +410,16 @@ class Parser:
             self.eat(')')
         elif 'not' in self.current:
             self.eat('not')
+            self.ast.add_level('not')
             self.factor()
         elif 'true' in self.current:
             self.eat('true')
+            self.ast.add_level('true')
         # elif 'false' in self.current:
         else:
             self.eat('false')
+            self.ast.add_level('false')
+        self.ast.del_level()
 
     def identifier(self):
         self.ast.add_curr(self.current[1])
