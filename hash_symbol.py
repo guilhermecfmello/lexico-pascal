@@ -60,7 +60,7 @@ class HashTable:
             for i, data in enumerate(bucket):
                 index = self.hash_func(data)
                 aux = (data, index)
-                print("Identificador [ %s ] armazenado no indice [ %d ] da tabela\n" % aux)
+                # print("Identificador [ %s ] armazenado no indice [ %d ] da tabela\n" % aux)
 
     # def delete(self, key):
     #     bucket = self.table[self.hash_func(key)]

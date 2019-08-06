@@ -71,7 +71,7 @@ class AFD:
                         self.scanned.append(token[1])
                 else:
                     self.scanning_error(line_count, pos)
-        self.scanner_print()
+        # self.scanner_print()
         self.scanning_end()
 
     def next_word(self, line, pos, size, id_table):
